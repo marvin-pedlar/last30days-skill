@@ -850,7 +850,7 @@ def render_full(report: schema.Report) -> str:
     # ALL items by source (flat dump, v2-style)
     lines.append("## All Items by Source")
     lines.append("")
-    source_order = ["reddit", "x", "youtube", "tiktok", "instagram", "threads", "pinterest",
+    source_order = ["reddit", "x", "youtube", "tiktok", "instagram", "threads", "linkedin", "pinterest",
                     "hackernews", "bluesky", "truthsocial", "polymarket", "grounding", "xiaohongshu", "github", "digg", "perplexity"]
     for source in source_order:
         items = report.items_by_source.get(source, [])
@@ -1248,6 +1248,7 @@ _FOOTER_SOURCES: list[tuple[str, str, str, str, list[tuple[str, str]]]] = [
     ("tiktok",      "🎵", "TikTok",       "video",    [("views", "views"), ("likes", "likes")]),
     ("instagram",   "📸", "Instagram",    "reel",     [("views", "views"), ("likes", "likes")]),
     ("threads",     "🧵", "Threads",      "post",     [("likes", "likes"), ("replies", "replies")]),
+    ("linkedin",    "💼", "LinkedIn",     "post",     [("likes", "likes"), ("comments", "comments")]),
     ("pinterest",   "📌", "Pinterest",    "pin",      [("saves", "saves"), ("comments", "comments")]),
     ("hackernews",  "🟡", "HN",           "story",    [("points", "points"), ("comments", "comments")]),
     ("bluesky",     "🦋", "Bluesky",      "post",     [("likes", "likes"), ("reposts", "reposts")]),
@@ -1505,6 +1506,7 @@ ENGAGEMENT_DISPLAY: dict[str, list[tuple[str, str]]] = {
     "tiktok":       [("views", "views"), ("likes", "likes"), ("comments", "cmt")],
     "instagram":    [("views", "views"), ("likes", "likes"), ("comments", "cmt")],
     "threads":      [("likes", "likes"), ("replies", "re")],
+    "linkedin":     [("likes", "likes"), ("comments", "cmt")],
     "pinterest":    [("saves", "saves"), ("comments", "cmt")],
     "hackernews":   [("points", "pts"), ("comments", "cmt")],
     "bluesky":      [("likes", "likes"), ("reposts", "rt"), ("replies", "re")],

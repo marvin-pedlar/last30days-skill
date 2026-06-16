@@ -64,6 +64,7 @@ SOURCE_CAPABILITIES = {
     "youtube": {"video", "video_longform", "discussion"},
     "tiktok": {"video", "video_shortform", "social"},
     "instagram": {"video", "video_shortform", "social"},
+    "linkedin": {"discussion", "social"},
     "hackernews": {"discussion", "link"},
     "bluesky": {"discussion", "social"},
     "truthsocial": {"discussion", "social"},

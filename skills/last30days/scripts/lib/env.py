@@ -619,6 +619,23 @@ def is_threads_available(config: dict[str, Any]) -> bool:
     return bool(config.get('SCRAPECREATORS_API_KEY'))
 
 
+def is_linkedin_available(config: dict[str, Any]) -> bool:
+    """Check if LinkedIn source is configured (ScrapeCreators).
+
+    Returns True when SCRAPECREATORS_API_KEY is set. Unlike the always-on SC
+    family (TikTok/Instagram/Threads), LinkedIn is OPT-IN: the pipeline only
+    runs it when 'linkedin' is in INCLUDE_SOURCES or the per-run requested
+    sources. This helper just reports key presence; the opt-in gate lives in
+    pipeline.available_sources(). Same key, same 1-credit-per-call cost shape.
+    """
+    return bool(config.get('SCRAPECREATORS_API_KEY'))
+
+
+def get_linkedin_token(config: dict[str, Any]) -> str:
+    """Get the LinkedIn API token (same ScrapeCreators key as TikTok)."""
+    return config.get('SCRAPECREATORS_API_KEY') or ''
+
+
 def is_instagram_available(config: dict[str, Any]) -> bool:
     """Check if Instagram source is available (ScrapeCreators).
 

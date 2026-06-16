@@ -22,6 +22,7 @@ from . import (
     grounding,
     hackernews,
     instagram,
+    linkedin,
     normalize,
     perplexity,
     pinterest,
@@ -80,6 +81,7 @@ MOCK_AVAILABLE_SOURCES = [
     "github",
     "perplexity",
     "threads",
+    "linkedin",
     "pinterest",
     "xquik",
     "digg",
@@ -128,6 +130,13 @@ def available_sources(config: dict[str, Any], requested_sources: list[str] | Non
         available.append("xiaohongshu")
     if env.is_threads_available(config):
         available.append("threads")
+    # LinkedIn: opt-in additive source via INCLUDE_SOURCES=linkedin (same SC
+    # key as TikTok/Instagram/Threads, 1 credit per request). Kept opt-in
+    # rather than always-on so LinkedIn credits are only spent on demand.
+    if env.is_linkedin_available(config) and (
+        "linkedin" in include_sources or (requested_sources and "linkedin" in requested_sources)
+    ):
+        available.append("linkedin")
     if requested_sources and "pinterest" in requested_sources and env.is_pinterest_available(config):
         available.append("pinterest")
     if env.is_xquik_available(config):
@@ -1000,6 +1009,13 @@ def _retrieve_stream(
             token=config.get("SCRAPECREATORS_API_KEY"),
         )
         return threads.parse_threads_response(result), {}
+    if source == "linkedin":
+        result = linkedin.search_linkedin(
+            subquery.search_query, from_date, to_date,
+            depth=depth,
+            token=env.get_linkedin_token(config),
+        )
+        return linkedin.parse_linkedin_response(result), {}
     if source == "truthsocial":
         result = truthsocial.search_truthsocial(subquery.search_query, from_date, to_date, depth=depth, config=config)
         return truthsocial.parse_truthsocial_response(result), {}

@@ -46,6 +46,7 @@ def normalize_source_items(
         "bluesky": lambda s, i, idx, fd, td: _normalize_microblog(s, i, idx, fd, td, "BS", "Bluesky post"),
         "truthsocial": lambda s, i, idx, fd, td: _normalize_microblog(s, i, idx, fd, td, "TS", "Truth Social post"),
         "threads": lambda s, i, idx, fd, td: _normalize_microblog(s, i, idx, fd, td, "TH", "Threads post"),
+        "linkedin": lambda s, i, idx, fd, td: _normalize_microblog(s, i, idx, fd, td, "LI", "LinkedIn post"),
         "xquik": _normalize_x,
         "pinterest": _normalize_pinterest,
         "polymarket": _normalize_polymarket,
